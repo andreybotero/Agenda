@@ -3,12 +3,12 @@ let errorCont = 0;
 
 
 class contact {
-    constructor(fullName, landline, celphone, URL, date, email, CEP, city, insta, github) {
+    constructor(fullName, landline, celphone, url, date, email, CEP, city, insta, github) {
 
         this.fullName = fullName;
         this.landline = landline;
         this.celphone = celphone;
-        this.URL = URL;
+        this.url = url;
         this.date = date;
         this.email = email;
         this.CEP = CEP;
@@ -114,7 +114,7 @@ function clearFields() {
     document.getElementById("fullName").value = "";
     document.getElementById("landline").value = "";
     document.getElementById("celphone").value = "";
-    document.getElementById("URL").value = "";
+    document.getElementById("url").value = "";
     document.getElementById("date").value = "";
     document.getElementById("email").value = "";
     document.getElementById("CEP").value = "";
@@ -127,7 +127,7 @@ function createContact() {
     let fullName = document.getElementById("fullName").value;
     let landline = document.getElementById("landline").value;
     let celphone = document.getElementById("celphone").value;
-    let URL = document.getElementById("URL").value;
+    let url = document.getElementById("url").value;
     let date = document.getElementById("date").value;
     let email = document.getElementById("email").value;
     let CEP = document.getElementById("CEP").value;
@@ -135,11 +135,12 @@ function createContact() {
     let insta = document.getElementById("insta").value;
     let github = document.getElementById("github").value;
 
-    const contato = new contact(fullName, landline, celphone, URL, date, email, CEP, city, insta, github);
+    const contato = new contact(fullName, landline, celphone, url, date, email, CEP, city, insta, github);
     lista.addContact(contato);
 
 
     renderContact();
+    clearFields();
 }
 
 function isAnyInputEmpty() {
@@ -147,7 +148,7 @@ function isAnyInputEmpty() {
     document.getElementById("fullName").value;
     document.getElementById("landline").value;
     document.getElementById("celphone").value;
-    document.getElementById("URL").value;
+    document.getElementById("url").value;
     document.getElementById("date").value;
     document.getElementById("email").value;
     document.getElementById("CEP").value;
@@ -155,7 +156,7 @@ function isAnyInputEmpty() {
     document.getElementById("insta").value;
     document.getElementById("github").value;
 
-    if (fullName == "" || landline == "" || celphone == "" || URL == "" || date == "" || email == "" || CEP == "" || city == "" || insta == "" || github == "") {
+    if (fullName == "" || landline == "" || celphone == "" || url == "" || date == "" || email == "" || CEP == "" || city == "" || insta == "" || github == "") {
         return sendErrorMsg("Preencha todos os campos");
     } else {
         return sendsuccessMsg("Cadastrado com sucesso");
@@ -167,28 +168,26 @@ const jorge = new listContact();
 
 function renderContact() {
 
-    const listHTML = document.getElementById("lil-card");
-    listHTML.innerHTML = "";
+    let html = "";
 
-    const contacts = jorge.listContact;
-
-    contacts.forEach(contact => {
-
-        const contactDiv = `<div id="newmensage" onclick="bigCard()">
-            <img src="${contact.URL}">
+    lista.listContact.forEach(contact => {
+        html += `<div id="newmensage" onclick="bigCard()">
+            <img src="${contact.url}">
             <p>${contact.fullName}</p>
             <p> Telefone Fixo: ${contact.formatedLandline}</p>
             <p> Telefone Celular: ${contact.formatedCellphone}</p>
         </div>`;
 
-        listHTML.innerHTML += contactDiv;
+
     });
+
+    document.getElementById("lil-card").innerHTML = html;
 }
 
 function bigCard() {
     `<div id="bigcard">
     <p>Detalhe</p>
-    <img src="${URL}"
+    <img src="${url}"
     
     <p>${fullName}</p>
 
